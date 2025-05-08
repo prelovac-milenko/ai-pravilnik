@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  fastapi_app:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "80:8000"
+    volumes:
+      - ./uploads:/app/uploads
+    restart: unless-stopped
