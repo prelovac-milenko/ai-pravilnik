@@ -49,6 +49,6 @@ async def ask_question(
     answer = ask_gemini(question, context)
 
     # Forma odgovora
-    response = f"Pozdrav! U dokumentu '{documents[0][0]}' sam našao odgovor na tvoje pitanje: \n\n{answer.strip()}"
+    response = f"Pozdrav! našao sam odgovor na tvoje pitanje: \n\n{answer.strip()}"
 
     return templates.TemplateResponse("index.html", {"request": request, "answer": response})
