@@ -1,29 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>PDF Q&A App</title>
-  <link rel="stylesheet" href="/static/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF AI Asistent </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
-  <div class="container">
-  <h1>PDF AI asistent za studente</h1>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="logo-container">
+        <i class="fas fa-graduation-cap logo-icon"></i>
+        <h1>PDF AI Asistent</h1>
+      </div>
+    </header>
 
-  <h2>1. Upload PDF dokumenata (samo prvi put)</h2>
-  <form method="post" enctype="multipart/form-data" action="/upload">
-    <input type="file" name="files" multiple required>
-    <button type="submit">Dodaj dokumente</button>
-  </form>
+    <div class="content-wrapper">
+      <section class="upload-section card">
+        <div class="section-header">
+          <i class="fas fa-cloud-upload-alt icon"></i>
+          <h2>Dodaj PDF</h2>
+        </div>
+        <p class="section-description">Dodaj dokument ili više dokumenata (samo jednom)</p>
 
-  <h2>2. Postavi pitanje</h2>
-  <form method="post" action="/ask">
-    <input type="text" name="question" placeholder="Unesi pitanje..." required>
-    <button type="submit">Pošalji</button>
-  </form>
+        <form method="post" enctype="multipart/form-data" action="/upload" class="upload-form">
+          <div class="file-upload-wrapper">
+            <label for="file-upload" class="file-upload-label">
+              <i class="fas fa-file-pdf"></i>
+              <span>Choose PDF Files</span>
+              <input type="file" id="file-upload" name="files" multiple required>
+            </label>
+            <span class="file-info">Nema dodatih fajlova</span>
+          </div>
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-database"></i> Ubaci dokument
+          </button>
+        </form>
+      </section>
 
-  {% if answer %}
-    <h2>Odgovor:</h2>
-    <p>{{ answer }}</p>
-  {% endif %}
-</div>
+      <section class="ask-section card">
+        <div class="section-header">
+          <i class="fas fa-comment-dots icon"></i>
+          <h2>Postavi pitanje</h2>
+        </div>
+        <p class="section-description">Odmah dobijaš odogovor na tvoje pitanje</p>
+
+        <form method="post" action="/ask" class="ask-form">
+          <div class="input-group">
+            <i class="fas fa-question input-icon"></i>
+            <input type="text" name="question" placeholder="Šta te zanima ?" required class="question-input">
+          </div>
+          <button type="submit" class="submit-btn ask-btn">
+            <i class="fas fa-paper-plane"></i> Postavi pitanje
+          </button>
+        </form>
+        <div class="loading-container hidden">
+          <!-- From Uiverse.io by KSAplay -->
+          <div class="loader">
+            <div class="loading-text">
+              Analiziram pitanje<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+            </div>
+            <div class="loading-bar-background">
+              <div class="loading-bar">
+                <div class="white-bars-container">
+                  <div class="white-bar"></div>
+                  <div class="white-bar"></div>
+                  <div class="white-bar"></div>
+                  <div class="white-bar"></div>
+                  <div class="white-bar"></div>
+                  <div class="white-bar"></div>
+                  <div class="white-bar"></div>
+                  <div class="white-bar"></div>
+                  <div class="white-bar"></div>
+                  <div class="white-bar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      {% if answer %}
+      <section class="answer-section card">
+        <div class="section-header">
+          <i class="fas fa-lightbulb icon"></i>
+          <h2>Odgovor</h2>
+        </div>
+        <div class="answer-content">
+          <p>{{ answer }}</p>
+        </div>
+        <div class="answer-actions">
+          <button class="action-btn"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+      </section>
+      {% endif %}
+    </div>
+
+    <footer class="app-footer">
+      <p>© 2025 PDF Asistent | FPE</p>
+    </footer>
+  </div>
+
+  <script src="/static/script.js"></script>
 </body>
+
 </html>
