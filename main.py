@@ -42,13 +42,13 @@ async def ask_question(
     if not documents:
         return templates.TemplateResponse("index.html", {"request": request, "answer": "Nema učitanih PDF dokumenata. Prvo ih postavite."})
 
-    # Kombinuj sve dokumente u jedan veliki kontekst
+   
     context = "\n\n".join([f"DOKUMENT: {name}\n{content}" for name, content in documents])
 
-    # Pitaj AI
+
     answer = ask_gemini(question, context)
 
-    # Forma odgovora
+ 
     response = f"Pozdrav! našao sam odgovor na tvoje pitanje: \n\n{answer.strip()}"
 
     return templates.TemplateResponse("index.html", {"request": request, "answer": response})
